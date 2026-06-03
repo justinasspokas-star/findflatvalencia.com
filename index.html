@@ -77,12 +77,8 @@
    top: 0;
    z-index: 100;
    height: 72px;
-   background: rgba(246,242,236,.94);
-   backdrop-filter: blur(12px);
-   -webkit-backdrop-filter: blur(12px);
+   background: #F6F2EC; /* solid — no backdrop-filter, no blur bleed on iOS */
    border-bottom: 1px solid var(--border);
-   /* Isolation prevents backdrop-filter from bleeding into child panels */
-   isolation: isolate;
   }
   .nav-inner {
    max-width: var(--max);
@@ -781,8 +777,7 @@
   (function () {
    const toggle   = document.querySelector('.mobile-menu-toggle');
    const navLinks = document.querySelector('.nav-links');
-   const backdrop = document.querySelector(".mobile-menu-backdrop");
-   const siteNav   = document.querySelector("nav.site-nav");
+   const backdrop = document.querySelector('.mobile-menu-backdrop');
 
    if (!toggle || !navLinks) return;
 
@@ -792,8 +787,6 @@
     toggle.setAttribute('aria-label', 'Close menu');
     document.body.style.overflow = 'hidden';
     if (backdrop) backdrop.classList.add('open');
-    // Disable nav blur so it cannot bleed into the menu panel
-    if (siteNav) { siteNav.style.backdropFilter = 'none'; siteNav.style.webkitBackdropFilter = 'none'; }
    }
 
    function closeMenu() {
@@ -802,8 +795,6 @@
     toggle.setAttribute('aria-label', 'Open menu');
     document.body.style.overflow = '';
     if (backdrop) backdrop.classList.remove('open');
-    // Restore nav blur
-    if (siteNav) { siteNav.style.backdropFilter = ''; siteNav.style.webkitBackdropFilter = ''; }
    }
 
    toggle.addEventListener('click', () => {
