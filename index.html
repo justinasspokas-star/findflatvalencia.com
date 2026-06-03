@@ -72,7 +72,6 @@
   .container { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
 
   /* ─── NAV ─── */
-  /* FIX: añadida clase .site-nav al nav en HTML para que este CSS aplique */
   nav.site-nav {
    position: sticky;
    top: 0;
@@ -82,6 +81,8 @@
    backdrop-filter: blur(12px);
    -webkit-backdrop-filter: blur(12px);
    border-bottom: 1px solid var(--border);
+   /* Isolation prevents backdrop-filter from bleeding into child panels */
+   isolation: isolate;
   }
   .nav-inner {
    max-width: var(--max);
@@ -308,18 +309,20 @@
     margin-left: auto;
    }
 
-   /* Panel lateral deslizante */
+   /* Panel lateral deslizante — solid opaque, no blur */
    .nav-links {
     position: fixed;
     top: 0;
     right: 0;
     width: min(82vw, 320px);
-    height: 100dvh; /* dvh para Safari iOS */
+    height: 100dvh;
     padding: 0;
-    background: var(--white);
+    background: #FDFAF6;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     border-left: 1px solid var(--border);
-    box-shadow: -24px 0 70px rgba(0,0,0,.18);
-    display: flex !important; /* siempre en flex, posición controlada por transform */
+    box-shadow: -24px 0 70px rgba(0,0,0,.22);
+    display: flex !important;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
@@ -327,6 +330,7 @@
     transform: translateX(105%);
     transition: transform .28s cubic-bezier(.4,0,.2,1);
     z-index: 1001;
+    isolation: isolate;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
    }
@@ -777,7 +781,8 @@
   (function () {
    const toggle   = document.querySelector('.mobile-menu-toggle');
    const navLinks = document.querySelector('.nav-links');
-   const backdrop = document.querySelector('.mobile-menu-backdrop');
+   const backdrop = document.querySelector(".mobile-menu-backdrop");
+   const siteNav   = document.querySelector("nav.site-nav");
 
    if (!toggle || !navLinks) return;
 
@@ -787,6 +792,8 @@
     toggle.setAttribute('aria-label', 'Close menu');
     document.body.style.overflow = 'hidden';
     if (backdrop) backdrop.classList.add('open');
+    // Disable nav blur so it cannot bleed into the menu panel
+    if (siteNav) { siteNav.style.backdropFilter = 'none'; siteNav.style.webkitBackdropFilter = 'none'; }
    }
 
    function closeMenu() {
@@ -795,6 +802,8 @@
     toggle.setAttribute('aria-label', 'Open menu');
     document.body.style.overflow = '';
     if (backdrop) backdrop.classList.remove('open');
+    // Restore nav blur
+    if (siteNav) { siteNav.style.backdropFilter = ''; siteNav.style.webkitBackdropFilter = ''; }
    }
 
    toggle.addEventListener('click', () => {
