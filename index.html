@@ -9,13 +9,18 @@
  <meta name="keywords" content="find flat Valencia, property finder Valencia, rent flat Valencia expats, Valencia relocation service, apartment finder Valencia, buying property Valencia foreigner" />
  <link rel="canonical" href="https://findflatvalencia.com/" />
 
+ <!-- FIX: og:image añadido + og:locale corregido -->
  <meta property="og:type" content="website" />
  <meta property="og:title" content="Find a Flat in Valencia as an Expat | Find Flat Valencia" />
  <meta property="og:description" content="English-speaking property search and relocation support for expats moving to Valencia." />
  <meta property="og:url" content="https://findflatvalencia.com/" />
- <meta property="og:locale" content="en_US" />
+ <meta property="og:image" content="https://findflatvalencia.com/valencia-landing-hero-v2.jpg" />
+ <meta property="og:locale" content="en_GB" />
+ <meta property="og:locale:alternate" content="es_ES" />
  <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:image" content="https://findflatvalencia.com/valencia-landing-hero-v2.jpg" />
 
+ <!-- FIX: JSON-LD separado del JS — script limpio -->
  <script type="application/ld+json">
  {
   "@context": "https://schema.org",
@@ -34,32 +39,10 @@
   "areaServed": "Valencia, Spain",
   "serviceType": ["Flat Search", "Property Search", "Relocation Support", "Property Management"],
   "sameAs": [
-   "https://www.facebook.com/Find Flat Valencia/",
+   "https://www.facebook.com/FindFlatValencia/",
    "https://www.instagram.com/find_flat_valencia/"
   ]
  }
- 
-  const menuToggle = document.querySelector('.mobile-menu-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (menuToggle && navLinks) {
-   menuToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    
-   });
-
-   navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-     navLinks.classList.remove('open');
-     menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.setAttribute('aria-label', 'Open menu');
-     
-    });
-   });
-  }
-);
-  }
-
  </script>
 
  <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -88,9 +71,45 @@
   a { color: inherit; }
   .container { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
 
-  nav { position: sticky; top: 0; z-index: 50; height: 72px; background: rgba(246,242,236,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-  .nav-inner { max-width: var(--max); height: 72px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
-  .logo { font-family: var(--display); font-size: 1.35rem; font-weight: 500; text-decoration: none; letter-spacing: .01em; white-space: nowrap; }
+  /* ─── NAV ─── */
+  /* FIX: añadida clase .site-nav al nav en HTML para que este CSS aplique */
+  nav.site-nav {
+   position: sticky;
+   top: 0;
+   z-index: 100;
+   height: 72px;
+   background: rgba(246,242,236,.94);
+   backdrop-filter: blur(12px);
+   -webkit-backdrop-filter: blur(12px);
+   border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+   max-width: var(--max);
+   height: 72px;
+   margin: 0 auto;
+   padding: 0 2rem;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 1.5rem;
+  }
+  .logo {
+   display: inline-flex;
+   align-items: center;
+   text-decoration: none;
+   line-height: 1;
+   font-family: var(--display);
+   font-size: 1.35rem;
+   font-weight: 500;
+   letter-spacing: .01em;
+   white-space: nowrap;
+  }
+  .logo img {
+   display: block;
+   height: 38px;
+   width: auto;
+   object-fit: contain;
+  }
   .logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
   .nav-links a { text-decoration: none; color: var(--mid); text-transform: uppercase; letter-spacing: .08em; font-size: .76rem; font-weight: 600; }
@@ -98,6 +117,49 @@
   .nav-cta { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; background: var(--dark); color: var(--white); padding: .75rem 1.05rem; text-decoration: none; text-transform: uppercase; letter-spacing: .08em; font-size: .74rem; font-weight: 700; }
   .nav-cta:hover { background: var(--accent); }
 
+  /* ─── HAMBURGER BUTTON — hidden by default, shown on mobile ─── */
+  .mobile-menu-toggle {
+   display: none;
+   width: 46px;
+   height: 46px;
+   border: 1px solid var(--dark);
+   background: var(--dark);
+   color: var(--white);
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   position: relative;
+   z-index: 1002;
+   flex: 0 0 auto;
+   padding: 0;
+  }
+
+  /* Hamburger icon lines */
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+   display: block;
+   width: 20px;
+   height: 2px;
+   background: currentColor;
+   transition: transform .25s ease, opacity .25s ease;
+  }
+  .hamburger { position: relative; }
+  .hamburger::before,
+  .hamburger::after {
+   content: "";
+   position: absolute;
+   left: 0;
+  }
+  .hamburger::before { top: -7px; }
+  .hamburger::after  { top: 7px; }
+
+  /* Animated X when open */
+  .mobile-menu-toggle[aria-expanded="true"] .hamburger { background: transparent; }
+  .mobile-menu-toggle[aria-expanded="true"] .hamburger::before { transform: translateY(7px) rotate(45deg); }
+  .mobile-menu-toggle[aria-expanded="true"] .hamburger::after  { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ─── HERO ─── */
   .hero { min-height: calc(100vh - 72px); display: grid; grid-template-columns: 1.05fr .95fr; }
   .hero-copy { padding: 5.5rem 2rem 5rem max(2rem, calc((100vw - var(--max))/2 + 2rem)); display: flex; flex-direction: column; justify-content: center; }
   .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .16em; font-size: .75rem; font-weight: 700; margin-bottom: 1.2rem; }
@@ -132,6 +194,7 @@
   .hero-card strong { display: block; font-family: var(--display); color: var(--accent); font-size: 1.6rem; font-weight: 400; line-height: 1.1; margin-bottom: .35rem; }
   .hero-card p { color: var(--mid); font-size: .88rem; }
 
+  /* ─── TRUST BAR ─── */
   .trust { background: var(--dark); color: var(--white); }
   .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
   .trust-item { padding: 1.7rem 1rem; border-right: 1px solid rgba(255,255,255,.08); text-align: center; }
@@ -139,6 +202,7 @@
   .trust-item strong { display: block; font-family: var(--display); font-size: 2rem; font-weight: 300; color: var(--accent2); line-height: 1; }
   .trust-item span { display: block; margin-top: .4rem; color: rgba(255,255,255,.55); font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 600; }
 
+  /* ─── SECTIONS ─── */
   section { padding: 6rem 0; }
   .section-head { max-width: 680px; margin-bottom: 3rem; }
   h2 { font-family: var(--display); font-size: clamp(2.1rem, 4vw, 3.45rem); line-height: 1.12; font-weight: 300; margin-bottom: 1rem; }
@@ -205,820 +269,240 @@
 
   footer { background: #141311; color: rgba(255,255,255,.45); padding: 3rem 0 2rem; }
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2rem; border-bottom: 1px solid rgba(255,255,255,.08); padding-bottom: 2rem; }
-  footer .logo { color: var(--white); display: inline-block; margin-bottom: .8rem; }
+  .footer-brand { display: flex; align-items: center; margin-bottom: 1rem; }
+  .footer-brand img { display: block; height: 44px; width: auto; object-fit: contain; }
   footer p, footer a { color: rgba(255,255,255,.45); font-size: .86rem; text-decoration: none; }
   footer a:hover { color: var(--accent2); }
   footer h4 { color: rgba(255,255,255,.72); text-transform: uppercase; letter-spacing: .12em; font-size: .7rem; margin-bottom: .75rem; }
   footer ul { list-style: none; display: grid; gap: .45rem; }
   .footer-bottom { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1.5rem; flex-wrap: wrap; }
 
+  .about { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .about .section-head { max-width: 820px; }
+  .about .section-text + .section-text { margin-top: 1rem; }
 
- 
-  /* ─── MOBILE-FIRST IMPROVEMENTS ─── */
-  .mobile-menu-toggle {
-   display: none;
-   border: 1px solid var(--border);
-   background: rgba(253,250,246,.82);
-   color: var(--dark);
-   padding: .62rem .72rem;
-   font-size: .76rem;
-   font-weight: 800;
-   letter-spacing: .08em;
-   text-transform: uppercase;
-   cursor: pointer;
-  }
-
-  @media (max-width: 950px) {
+  /* ══════════════════════════════════════════
+     MOBILE MENU — unified, single breakpoint
+     FIX: todo consolidado, sin contradicciones
+  ══════════════════════════════════════════ */
+  @media (max-width: 860px) {
    body { overflow-x: hidden; }
+
+   nav.site-nav { height: 68px; }
+
    .nav-inner {
-    height: 64px;
-    padding: 0 1rem;
-    position: relative;
+    height: 68px;
+    padding-inline: 1rem;
    }
-   .logo { font-size: 1.12rem; }
-   .nav-cta {
-    display: none;
-   }
+
+   .logo img { height: 32px; max-width: 200px; }
+
+   /* Ocultar nav-links desktop y nav-cta */
+   .nav-cta { display: none !important; }
+
+   /* Mostrar botón hamburguesa */
    .mobile-menu-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-flex !important;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
    }
+
+   /* Panel lateral deslizante */
    .nav-links {
-    display: none;
-    position: absolute;
-    top: 64px;
-    left: 1rem;
-    right: 1rem;
-    background: rgba(253,250,246,.98);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    padding: .75rem;
-    z-index: 80;
-    flex-direction: column;
-    align-items: stretch;
-    gap: .15rem;
-   }
-   .nav-links.open { display: flex; }
-   .nav-links li { width: 100%; }
-   .nav-links a {
-    display: block;
-    padding: .85rem .8rem;
-    font-size: .78rem;
-   }
-
-   .hero {
-    min-height: auto;
-    grid-template-columns: 1fr;
-   }
-   .hero-copy {
-    min-height: auto;
-    padding: 3.2rem 1.1rem 2.4rem;
-   }
-   h1 {
-    font-size: clamp(2.55rem, 12vw, 3.65rem);
-    line-height: 1.04;
-    margin-bottom: 1.05rem;
-   }
-   .hero-sub {
-    font-size: .98rem;
-    line-height: 1.65;
-    margin-bottom: 1.25rem;
-   }
-   .hero-pain {
-    gap: .45rem;
-    margin-bottom: 1.45rem;
-   }
-   .hero-pain li {
-    font-size: .88rem;
-    line-height: 1.45;
-   }
-   .actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: .65rem;
-   }
-   .btn {
-    width: 100%;
-    min-height: 50px;
-    padding: .9rem 1rem;
-   }
-   .microcopy {
-    font-size: .76rem;
-    line-height: 1.45;
-   }
-   .hero-media {
-    order: -1;
-    min-height: 300px;
-    background-position: center 22%;
-   }
-   .hero-media::before {
-    background: linear-gradient(180deg, rgba(26,25,22,.08) 0%, rgba(26,25,22,.20) 100%);
-   }
-   .hero-card {
-    right: 1rem;
-    left: 1rem;
-    bottom: 1rem;
-    width: auto;
-    padding: 1rem;
-   }
-   .hero-card strong {
-    font-size: 1.28rem;
-   }
-   .hero-card p {
-    font-size: .82rem;
-    line-height: 1.45;
-   }
-
-   section { padding: 4.2rem 0; }
-   .container, .nav-inner {
-    padding-left: 1.1rem;
-    padding-right: 1.1rem;
-   }
-   .section-head {
-    margin-bottom: 2rem;
-   }
-   h2 {
-    font-size: clamp(2rem, 9vw, 2.75rem);
-   }
-   .section-text {
-    font-size: .94rem;
-    line-height: 1.65;
-   }
-
-   .trust-grid {
-    grid-template-columns: repeat(2, 1fr);
-   }
-   .trust-item {
-    padding: 1.25rem .75rem;
-   }
-   .trust-item strong {
-    font-size: 1.55rem;
-   }
-   .trust-item span {
-    font-size: .66rem;
-   }
-
-   .problem-grid,
-   .lead-grid {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-   }
-   .problem-box,
-   .lead-box,
-   .card,
-   .package,
-   .faq-item {
-    padding: 1.35rem;
-   }
-
-   .cards,
-   .packages-grid,
-   .steps {
-    grid-template-columns: 1fr;
-    gap: .85rem;
-   }
-
-   .hood-grid {
-    grid-template-columns: 1fr;
-   }
-   .hood {
-    min-height: 220px;
-   }
-
-   .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 1.4rem;
-   }
-   .footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-   }
-
-   footer {
-    padding-bottom: 5.2rem;
-   }
-  }
-
-  @media (max-width: 560px) {
-   .eyebrow {
-    font-size: .68rem;
-    margin-bottom: .85rem;
-   }
-   .hero-media {
-    min-height: 250px;
-   }
-   .hero-card {
-    display: none;
-   }
-   .trust-grid,
-   .steps,
-   .faq-grid {
-    grid-template-columns: 1fr;
-   }
-   .trust-item {
-    border-right: 0;
-    border-bottom: 1px solid rgba(255,255,255,.08);
-   }
-   .trust-item:last-child {
-    border-bottom: 0;
-   }
-   .lead-form {
-    gap: .65rem;
-   }
-   .lead-form input,
-   .lead-form button {
-    min-height: 50px;
-    font-size: .9rem;
-   }
-  }
-
- 
-  /* ─── POLISHED MOBILE MENU BAR ─── */
-  .mobile-menu-cta { display: none; }
-
-  .hamburger {
-   position: relative;
-   display: block;
-   width: 22px;
-   height: 2px;
-   background: var(--dark);
-   border-radius: 999px;
-   transition: background .2s ease;
-  }
-  .hamburger::before,
-  .hamburger::after {
-   content: "";
-   position: absolute;
-   left: 0;
-   width: 22px;
-   height: 2px;
-   background: var(--dark);
-   border-radius: 999px;
-   transition: transform .22s ease, top .22s ease;
-  }
-  .hamburger::before { top: -7px; }
-  .hamburger::after { top: 7px; }
-
-  .mobile-menu-toggle[aria-expanded="true"] .hamburger {
-   background: transparent;
-  }
-  .mobile-menu-toggle[aria-expanded="true"] .hamburger::before {
-   top: 0;
-   transform: rotate(45deg);
-  }
-  .mobile-menu-toggle[aria-expanded="true"] .hamburger::after {
-   top: 0;
-   transform: rotate(-45deg);
-  }
-
-  @media (max-width: 950px) {
-   header.site-nav,
-   .site-nav {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 100;
-    background: rgba(246,242,236,.96);
-    backdrop-filter: blur(14px);
+    right: 0;
+    width: min(82vw, 320px);
+    height: 100dvh; /* dvh para Safari iOS */
+    padding: 0;
+    background: var(--white);
+    border-left: 1px solid var(--border);
+    box-shadow: -24px 0 70px rgba(0,0,0,.18);
+    display: flex !important; /* siempre en flex, posición controlada por transform */
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    transform: translateX(105%);
+    transition: transform .28s cubic-bezier(.4,0,.2,1);
+    z-index: 1001;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+   }
+
+   /* Header del panel */
+   .nav-links::before {
+    content: "Menu";
+    display: block;
+    padding: 1.5rem 1.25rem 1rem;
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    flex: 0 0 auto;
+   }
+
+   .nav-links.open { transform: translateX(0); }
+
+   .nav-links li {
+    width: 100%;
     border-bottom: 1px solid var(--border);
    }
 
-   .nav-inner {
-    height: 64px;
-   }
-
-   .mobile-menu-toggle {
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border-radius: 999px;
-    background: rgba(253,250,246,.92);
-    border: 1px solid rgba(26,25,22,.13);
-    box-shadow: 0 8px 24px rgba(26,25,22,.07);
-   }
-
-   .nav-links {
-    top: 72px;
-    left: 1rem;
-    right: 1rem;
-    padding: .5rem;
-    border-radius: 18px;
-    overflow: hidden;
-   }
-
    .nav-links a {
-    border-radius: 12px;
-    color: var(--dark);
-   }
-
-   .nav-links a:hover {
-    background: var(--bg2);
-   }
-
-   .mobile-menu-cta {
     display: block;
-    margin-top: .35rem;
-    padding-top: .35rem;
-    border-top: 1px solid var(--border);
+    padding: 1.1rem 1.25rem;
+    font-size: .88rem;
+    letter-spacing: .1em;
+    color: var(--dark);
+    text-decoration: none;
+   }
+
+   .nav-links a:hover { color: var(--accent); background: var(--bg); }
+
+   /* CTA dentro del panel */
+   .mobile-menu-cta {
+    display: block !important;
+    border-bottom: 0;
+    margin-top: auto;
+    padding: 1.25rem;
    }
 
    .mobile-menu-cta a {
-    background: var(--accent);
+    display: block;
+    background: var(--dark);
     color: var(--white) !important;
     text-align: center;
-    font-weight: 800;
-   }
-
-   .mobile-menu-cta a:hover {
-    background: var(--dark);
-   }
-  }
-
-  .about {
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .about .section-head {
-    max-width: 820px;
-  }
-  .about .section-text + .section-text {
-    margin-top: 1rem;
-  }
-
-
-  .logo {
-    display: inline-flex;
-    align-items: center;
+    padding: 1rem;
+    font-weight: 900;
+    font-size: .82rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
     text-decoration: none;
-    line-height: 1;
-  }
-  .logo img {
-    display: block;
-    height: 38px;
-    width: auto;
-    object-fit: contain;
-  }
-  .footer-brand img {
-    display: block;
-    height: 58px;
-    width: auto;
-    object-fit: contain;
-    margin-bottom: .8rem;
-  }
-  @media (max-width: 768px) {
-    .logo img {
-      height: 32px;
-    }
-    .footer-brand img {
-      height: 48px;
-    }
-  }
+   }
+   .mobile-menu-cta a:hover { background: var(--accent); }
 
-
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  .footer-brand img {
-    display: block;
-    height: 44px;
-    width: auto;
-    object-fit: contain;
-  }
-  @media (max-width: 768px) {
-    .footer-brand {
-      justify-content: flex-start;
-    }
-    .footer-brand img {
-      height: 40px;
-    }
-  }
-
-
-  footer .footer-brand {
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  footer .footer-brand img {
-    display: block;
-    height: 44px;
-    width: auto;
-    object-fit: contain;
-  }
-  @media (max-width: 768px) {
-    footer .footer-brand img {
-      height: 40px;
-    }
-  }
-
-
-  /* ─── MOBILE APP-LIKE NAV + RESPONSIVE POLISH ─── */
-  .mobile-menu-toggle {
+   /* Backdrop oscuro */
+   .mobile-menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,19,17,.44);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 999;
     display: none;
-    width: 46px;
-    height: 46px;
-    border: 1px solid var(--border);
-    background: var(--dark);
-    color: var(--white);
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    position: relative;
-    z-index: 1002;
-  }
+   }
+   .mobile-menu-backdrop.open { display: block; }
 
-  .hamburger,
-  .hamburger::before,
-  .hamburger::after {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: currentColor;
-    transition: transform .25s ease, opacity .25s ease;
-  }
+   /* ─ Resto de ajustes responsive ─ */
+   .hero { min-height: auto; grid-template-columns: 1fr; }
+   .hero-copy { padding: 3rem 1.25rem 2.5rem; }
+   h1 { font-size: clamp(2.6rem, 12vw, 3.8rem); line-height: 1.04; }
+   .hero-sub { font-size: .98rem; margin-bottom: 1.25rem; }
+   .hero-pain { gap: .45rem; margin-bottom: 1.45rem; }
+   .hero-pain li { font-size: .88rem; }
+   .actions { flex-direction: column; align-items: stretch; gap: .65rem; }
+   .btn { width: 100%; min-height: 52px; justify-content: center; }
+   .hero-media { order: -1; min-height: 280px; background-position: center 22%; }
+   .hero-media::before { background: linear-gradient(180deg, rgba(26,25,22,.08) 0%, rgba(26,25,22,.22) 100%); }
+   .hero-card { right: 1rem; left: 1rem; bottom: 1rem; width: auto; padding: 1rem; }
+   .hero-card strong { font-size: 1.2rem; }
+   .hero-card p { font-size: .82rem; }
 
-  .hamburger {
-    position: relative;
-  }
+   section { padding: 4rem 0; }
+   .container { padding-inline: 1.1rem; }
+   h2 { font-size: clamp(2rem, 9vw, 2.75rem); }
+   .section-head { margin-bottom: 2rem; }
 
-  .hamburger::before,
-  .hamburger::after {
-    content: "";
-    position: absolute;
-    left: 0;
-  }
+   .trust-grid { grid-template-columns: repeat(2, 1fr); }
+   .trust-item { padding: 1.25rem .75rem; }
+   .trust-item strong { font-size: 1.55rem; }
 
-  .hamburger::before {
-    top: -7px;
-  }
+   .problem-grid,
+   .lead-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 
-  .hamburger::after {
-    top: 7px;
-  }
+   .problem-box,
+   .lead-box,
+   .card,
+   .package { padding: 1.35rem; }
 
-  .mobile-menu-toggle[aria-expanded="true"] .hamburger {
-    background: transparent;
-  }
+   .cards,
+   .packages-grid,
+   .steps { grid-template-columns: 1fr; gap: .85rem; }
+   .steps { background: transparent; border: none; gap: 1px; }
 
-  .mobile-menu-toggle[aria-expanded="true"] .hamburger::before {
-    transform: translateY(7px) rotate(45deg);
-  }
+   .hood-grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
+   .hood { min-height: 180px; }
 
-  .mobile-menu-toggle[aria-expanded="true"] .hamburger::after {
-    transform: translateY(-7px) rotate(-45deg);
-  }
+   .faq-grid { grid-template-columns: 1fr; }
 
-  .mobile-menu-backdrop {
-    display: none;
-  }
-
-  @media (max-width: 860px) {
-    body {
-      overflow-x: hidden;
-    }
-
-    .site-nav {
-      z-index: 1000;
-    }
-
-    .nav-inner {
-      height: 72px;
-      padding-inline: 1rem;
-      display: flex;
-      justify-content: space-between;
-      gap: .75rem;
-    }
-
-    .logo img {
-      height: 34px;
-      max-width: 210px;
-    }
-
-    .mobile-menu-toggle {
-      display: inline-flex;
-      margin-left: auto;
-      flex: 0 0 auto;
-    }
-
-    .nav-cta {
-      display: none !important;
-    }
-
-    .nav-links {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: min(84vw, 360px);
-      height: 100vh;
-      padding: 6rem 1.25rem 1.25rem;
-      background: var(--white);
-      border-left: 1px solid var(--border);
-      box-shadow: -24px 0 70px rgba(0,0,0,.18);
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: flex-start;
-      gap: 0;
-      transform: translateX(105%);
-      transition: transform .28s ease;
-      z-index: 1001;
-      overflow-y: auto;
-    }
-
-    .nav-links.open {
-      transform: translateX(0);
-    }
-
-    .nav-links li {
-      width: 100%;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-links a {
-      display: block;
-      padding: 1rem .25rem;
-      font-size: .9rem;
-      letter-spacing: .12em;
-      color: var(--dark);
-    }
-
-    .nav-links .mobile-menu-cta {
-      display: block;
-      border-bottom: 0;
-      margin-top: 1rem;
-    }
-
-    .nav-links .mobile-menu-cta a {
-      background: var(--dark);
-      color: var(--white);
-      text-align: center;
-      padding: 1rem;
-      font-weight: 900;
-    }
-
-    .mobile-menu-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(20,19,17,.44);
-      backdrop-filter: blur(3px);
-      z-index: 999;
-    }
-
-    .mobile-menu-backdrop.open {
-      display: block;
-    }
-
-    .hero {
-      min-height: auto;
-      padding: 5.5rem 0 3.5rem;
-    }
-
-    .hero .container,
-    .hero-grid,
-    .split,
-    .two-col,
-    .footer-grid,
-    .cards,
-    .packages,
-    .process-grid,
-    .faq-grid {
-      grid-template-columns: 1fr !important;
-    }
-
-    .hero h1,
-    h1 {
-      font-size: clamp(3rem, 14vw, 4.9rem);
-      line-height: .96;
-      max-width: 100%;
-    }
-
-    .hero-sub,
-    .section-text,
-    p {
-      max-width: 100%;
-    }
-
-    .actions {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: .75rem;
-      width: 100%;
-    }
-
-    .btn,
-    .btn-primary,
-    .btn-secondary,
-    .btn-accent {
-      width: 100%;
-      justify-content: center;
-      text-align: center;
-      min-height: 52px;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    section {
-      padding: 4rem 0;
-    }
-
-    .container {
-      padding-inline: 1rem;
-    }
-
-    .section-head h2,
-    section h2 {
-      font-size: clamp(2.35rem, 11vw, 4rem);
-      line-height: 1;
-    }
-
-    .card,
-    .package-card,
-    .faq-item,
-    details,
-    .article-box,
-    .article-cta {
-      padding: 1.25rem !important;
-    }
-
-    img,
-    video,
-    iframe {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .hero-image,
-    .hero-photo,
-    .image-panel {
-      min-height: 320px;
-      background-position: center;
-    }
-
-    footer {
-      padding-bottom: 2rem;
-    }
-
-    footer .footer-grid {
-      gap: 2rem;
-    }
-
-    footer .footer-brand img {
-      height: 42px;
-      max-width: 250px;
-    }
-
-    .footer-bottom {
-      display: grid;
-      gap: .75rem;
-      text-align: left;
-    }
+   .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+   .footer-brand img { height: 40px; }
+   .footer-bottom { flex-direction: column; }
+   footer { padding-bottom: 3rem; }
   }
 
   @media (max-width: 480px) {
-    .nav-inner {
-      height: 68px;
-      padding-inline: .85rem;
-    }
+   nav.site-nav { height: 64px; }
+   .nav-inner { height: 64px; padding-inline: .85rem; }
+   .logo img { height: 30px; max-width: 175px; }
+   .mobile-menu-toggle { width: 42px; height: 42px; }
 
-    .logo img {
-      height: 31px;
-      max-width: 190px;
-    }
+   h1 { font-size: clamp(2.4rem, 13vw, 3.2rem); }
+   .hero-media { min-height: 240px; }
+   .hero-card { display: none; }
 
-    .mobile-menu-toggle {
-      width: 44px;
-      height: 44px;
-    }
+   .trust-grid { grid-template-columns: 1fr; }
+   .trust-item { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+   .trust-item:last-child { border-bottom: 0; }
 
-    .hero {
-      padding-top: 4.75rem;
-    }
+   .hood-grid { grid-template-columns: 1fr; }
+   .hood { min-height: 200px; }
 
-    .hero h1,
-    h1 {
-      font-size: clamp(2.65rem, 13.5vw, 4rem);
-    }
-
-    .eyebrow {
-      font-size: .68rem;
-      letter-spacing: .18em;
-    }
-
-    .hero-sub,
-    .section-text,
-    p,
-    li {
-      font-size: .96rem;
-      line-height: 1.65;
-    }
-
-    .nav-links {
-      width: min(88vw, 340px);
-      padding-top: 5.5rem;
-    }
+   .eyebrow { font-size: .68rem; }
+   .nav-links { width: min(88vw, 300px); }
   }
-
-
-  /* ─── CLEAR MOBILE MENU UX ─── */
-  @media (max-width: 860px) {
-    .mobile-menu-toggle {
-      display: inline-flex !important;
-      width: auto;
-      min-width: 86px;
-      height: 44px;
-      padding: 0 .9rem;
-      gap: .55rem;
-      border-radius: 0;
-      border: 1px solid var(--dark);
-      background: var(--dark);
-      color: var(--white);
-      font-size: .72rem;
-      font-weight: 900;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 22px rgba(0,0,0,.12);
-    }
-
-    .mobile-menu-toggle::before {
-      content: "Menu";
-    }
-
-    .mobile-menu-toggle[aria-expanded="true"]::before {
-      content: "Close";
-    }
-
-    .hamburger,
-    .hamburger::before,
-    .hamburger::after {
-      width: 18px;
-      height: 2px;
-    }
-
-    .nav-links {
-      top: 0;
-      right: 0;
-      padding-top: 5.25rem;
-    }
-
-    .nav-links::before {
-      content: "Navigation";
-      position: absolute;
-      top: 1.65rem;
-      left: 1.25rem;
-      font-size: .72rem;
-      font-weight: 900;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-
-    .nav-links a {
-      font-size: .86rem;
-      padding: 1.08rem .25rem;
-    }
-
-    .nav-links .mobile-menu-cta a {
-      margin-top: .45rem;
-      border-radius: 0;
-      box-shadow: none;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .mobile-menu-toggle {
-      min-width: 82px;
-      height: 42px;
-      padding: 0 .75rem;
-      font-size: .68rem;
-    }
-
-    .logo img {
-      max-width: 175px;
-    }
-  }
-
-</style>
+ </style>
 </head>
 <body>
- <nav aria-label="Main navigation">
+
+ <!-- FIX: clase .site-nav añadida al nav + botón hamburguesa movido DENTRO del nav -->
+ <nav class="site-nav" aria-label="Main navigation">
   <div class="nav-inner">
-   <a class="logo" href="index.html" aria-label="Find Flat Valencia home"><img src="find-flat-valencia-logo-official.png" alt="Find Flat Valencia logo"></a>
-   <ul class="nav-links">
+   <a class="logo" href="index.html" aria-label="Find Flat Valencia home">
+    <img src="find-flat-valencia-logo-official.png" alt="Find Flat Valencia logo">
+   </a>
+   <ul class="nav-links" id="main-nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#about">About us</a></li>
     <li><a href="#packages">Packages</a></li>
     <li><a href="#areas">Blog</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <!-- CTA dentro del panel móvil -->
+    <li class="mobile-menu-cta">
+     <a href="#contact">Book free call →</a>
+    </li>
    </ul>
+   <!-- FIX: botón hamburguesa DENTRO del nav, no del hero -->
+   <button
+    class="mobile-menu-toggle"
+    type="button"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="main-nav-links"
+   >
+    <span class="hamburger" aria-hidden="true"></span>
+   </button>
    <a class="nav-cta" href="#contact">Contact us</a>
   </div>
  </nav>
+
+ <!-- Backdrop para cerrar el menú al hacer tap fuera -->
+ <div class="mobile-menu-backdrop" aria-hidden="true"></div>
 
  <header class="hero">
   <div class="hero-copy">
@@ -1032,7 +516,7 @@
    </ul>
    <div class="actions">
     <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdxXPG-dzI2IXyH8CfDdJmxdlSp20rvUesakMLwTe5v26tiOw/viewform?usp=publish-editor" target="_blank" rel="noopener">Book a free 15-min call</a>
-</div>
+   </div>
    <p class="microcopy">No pressure. Tell us your budget, timeline and whether you want to rent or buy.</p>
   </div>
   <div class="hero-media" aria-label="Sunny street in Valencia">
@@ -1041,10 +525,7 @@
     <p>Get honest feedback before you sign a lease, pay a deposit or choose the wrong neighbourhood.</p>
    </div>
   </div>
- 
-      <button class="mobile-menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span class="hamburger" aria-hidden="true"></span></button>
-  </header>
-  <div class="mobile-menu-backdrop" aria-hidden="true"></div>
+ </header>
 
  <div class="trust" aria-label="Key reasons to trust Find Flat Valencia">
   <div class="container trust-grid">
@@ -1073,27 +554,25 @@
   </div>
  </section>
 
- 
-    <section id="about" class="about">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">About us</p>
-          <h2>We know the move<br><em>because we lived it.</em></h2>
-          <p class="section-text">
-            We are an international family who moved to Valencia 10 years ago. Before buying our own property in the city, we rented, searched, compared neighbourhoods and went through the same questions many expats face when arriving in Spain.
-          </p>
-          <p class="section-text">
-            That experience is why Find Flat Valencia was born: to help other expats move faster, easier and with more confidence. We know how stressful it can be to search from abroad, understand documents, speak with agencies, choose the right area and avoid wasting time on properties that do not fit.
-          </p>
-          <p class="section-text">
-            Our goal is simple: honest local support, clear guidance and a smoother property search for people who want to start their Valencia life the right way.
-          </p>
-        </div>
-      </div>
-    </section>
+ <section id="about" class="about">
+  <div class="container">
+   <div class="section-head">
+    <p class="eyebrow">About us</p>
+    <h2>We know the move<br><em>because we lived it.</em></h2>
+    <p class="section-text">
+     We are an international family who moved to Valencia 10 years ago. Before buying our own property in the city, we rented, searched, compared neighbourhoods and went through the same questions many expats face when arriving in Spain.
+    </p>
+    <p class="section-text">
+     That experience is why Find Flat Valencia was born: to help other expats move faster, easier and with more confidence. We know how stressful it can be to search from abroad, understand documents, speak with agencies, choose the right area and avoid wasting time on properties that do not fit.
+    </p>
+    <p class="section-text">
+     Our goal is simple: honest local support, clear guidance and a smoother property search for people who want to start their Valencia life the right way.
+    </p>
+   </div>
+  </div>
+ </section>
 
-
-    <section id="services" class="services">
+ <section id="services" class="services">
   <div class="container">
    <div class="section-head">
     <p class="eyebrow">What we do</p>
@@ -1148,8 +627,8 @@
    <div class="steps">
     <article class="step"><strong>01</strong><h3>Free call</h3><p>We review your timing, budget, lifestyle, family needs and whether renting or buying is the best first move.</p></article>
     <article class="step"><strong>02</strong><h3>Search plan</h3><p>You get realistic neighbourhood advice, required documents and a clear action plan.</p></article>
-    <article class="step"><strong>03</strong><h3>Shortlist & view</h3><p>We filter properties, contact agents, coordinate visits and report back honestly.</p></article>
-    <article class="step"><strong>04</strong><h3>Secure & settle</h3><p>We help with negotiation, paperwork coordination, key collection and move-in basics.</p></article>
+    <article class="step"><strong>03</strong><h3>Shortlist &amp; view</h3><p>We filter properties, contact agents, coordinate visits and report back honestly.</p></article>
+    <article class="step"><strong>04</strong><h3>Secure &amp; settle</h3><p>We help with negotiation, paperwork coordination, key collection and move-in basics.</p></article>
    </div>
   </div>
  </section>
@@ -1187,46 +666,43 @@
   </div>
  </section>
 
-    <section id="areas" class="areas">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Blog</p>
-          <h2>Valencia relocation<br><em>guides.</em></h2>
-          <p class="section-text">Practical articles for expats planning to rent, buy or move to Valencia.</p>
-        </div>
+ <section id="areas" class="areas">
+  <div class="container">
+   <div class="section-head">
+    <p class="eyebrow">Blog</p>
+    <h2>Valencia relocation<br><em>guides.</em></h2>
+    <p class="section-text">Practical articles for expats planning to rent, buy or move to Valencia.</p>
+   </div>
+   <div class="cards">
+    <article class="card">
+     <p class="eyebrow">Property search</p>
+     <h3>Property Finder Valencia: what it is and when you need one</h3>
+     <p>Learn how a property finder helps expats search, filter, negotiate and avoid mistakes when renting or buying in Valencia.</p>
+     <div class="actions" style="margin-top:1.2rem;">
+      <a class="btn btn-primary" href="property-finder-valencia-when-you-need-one.html">Read article</a>
+     </div>
+    </article>
+    <article class="card">
+     <p class="eyebrow">Moving from the USA</p>
+     <h3>Americans moving to Spain: main tips</h3>
+     <p>A practical starter guide for Americans planning to relocate to Spain, including visas, NIE, housing, banking, healthcare and Valencia-specific tips.</p>
+     <div class="actions" style="margin-top:1.2rem;">
+      <a class="btn btn-primary" href="americans-moving-to-spain-main-tips.html">Read article</a>
+     </div>
+    </article>
+    <article class="card">
+     <p class="eyebrow">Where to live</p>
+     <h3>Best 5 neighborhoods for living in Valencia in 2026</h3>
+     <p>A practical guide to choosing the right Valencia area depending on whether you are solo, a couple, a family, or looking for a quieter lifestyle.</p>
+     <div class="actions" style="margin-top:1.2rem;">
+      <a class="btn btn-primary" href="best-5-neighborhoods-valencia-2026.html">Read article</a>
+     </div>
+    </article>
+   </div>
+  </div>
+ </section>
 
-        <div class="cards">
-          <article class="card">
-            <p class="eyebrow">Property search</p>
-            <h3>Property Finder Valencia: what it is and when you need one</h3>
-            <p>Learn how a property finder helps expats search, filter, negotiate and avoid mistakes when renting or buying in Valencia.</p>
-            <div class="actions" style="margin-top:1.2rem;">
-              <a class="btn btn-primary" href="property-finder-valencia-when-you-need-one.html">Read article</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <p class="eyebrow">Moving from the USA</p>
-            <h3>Americans moving to Spain: main tips</h3>
-            <p>A practical starter guide for Americans planning to relocate to Spain, including visas, NIE, housing, banking, healthcare and Valencia-specific tips.</p>
-            <div class="actions" style="margin-top:1.2rem;">
-              <a class="btn btn-primary" href="americans-moving-to-spain-main-tips.html">Read article</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <p class="eyebrow">Where to live</p>
-            <h3>Best 5 neighborhoods for living in Valencia in 2026</h3>
-            <p>A practical guide to choosing the right Valencia area depending on whether you are solo, a couple, a family, or looking for a quieter lifestyle.</p>
-            <div class="actions" style="margin-top:1.2rem;">
-              <a class="btn btn-primary" href="best-5-neighborhoods-valencia-2026.html">Read article</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-<section class="lead" id="contact">
+ <section class="lead" id="contact">
   <div class="container lead-grid">
    <div>
     <p class="eyebrow" style="color:var(--accent2)">Ready to start?</p>
@@ -1244,7 +720,7 @@
     <div class="contact-options">
      <a href="https://wa.me/34698612614?text=Hi%20Find%20Flat%20Valencia%2C%20I%20would%20like%20a%20free%2015-minute%20call.%20My%20budget%20is%3A%20" target="_blank" rel="noopener"><span>WhatsApp</span><span>+34 698 612 614 →</span></a>
      <a href="tel:+34698612614"><span>Call</span><span>+34 698 612 614 →</span></a>
-     <a href="mailto:findflatvalencia@gmail.com?subject=Free%2015-minute%20call%20-%20Valencia%20flat%20search&body=Hi%20Find%20Flat%20Valencia%2C%0A%0AI%20would%20like%20to%20book%20a%20free%2015-minute%20call.%0A%0AMoving%20date%3A%0ABudget%3A%0ARent%20or%20buy%3A%0APreferred%20areas%3A%0A%0AThank%20you!" ><span>Email</span><span>findflatvalencia@gmail.com →</span></a>
+     <a href="mailto:findflatvalencia@gmail.com?subject=Free%2015-minute%20call%20-%20Valencia%20flat%20search&body=Hi%20Find%20Flat%20Valencia%2C%0A%0AI%20would%20like%20to%20book%20a%20free%2015-minute%20call.%0A%0AMoving%20date%3A%0ABudget%3A%0ARent%20or%20buy%3A%0APreferred%20areas%3A%0A%0AThank%20you!"><span>Email</span><span>findflatvalencia@gmail.com →</span></a>
     </div>
    </div>
   </div>
@@ -1276,15 +752,15 @@
      <h4>Contact</h4>
      <ul>
       <li><a href="tel:+34698612614">+34 698 612 614</a></li>
-      <li>
-</li>
+      <li><a href="mailto:findflatvalencia@gmail.com">findflatvalencia@gmail.com</a></li>
       <li><a href="https://maps.google.com/?q=Calle+Vidal+de+Blanes+14B+Valencia" target="_blank" rel="noopener">Calle Vidal de Blanes 14B, Valencia</a></li>
      </ul>
     </div>
     <div>
      <h4>Social</h4>
      <ul>
-      <li><a href="https://www.facebook.com/Find Flat Valencia/" target="_blank" rel="noopener">Facebook</a></li>
+      <!-- FIX: URL de Facebook corregida (sin espacios) -->
+      <li><a href="https://www.facebook.com/FindFlatValencia/" target="_blank" rel="noopener">Facebook</a></li>
       <li><a href="https://www.instagram.com/find_flat_valencia/" target="_blank" rel="noopener">Instagram</a></li>
      </ul>
     </div>
@@ -1295,52 +771,46 @@
    </div>
   </div>
  </footer>
-<script>
 
-    const menuToggle = document.querySelector('.mobile-menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    const backdrop = document.querySelector('.mobile-menu-backdrop');
+ <!-- FIX: único bloque JS limpio, sin duplicación -->
+ <script>
+  (function () {
+   const toggle   = document.querySelector('.mobile-menu-toggle');
+   const navLinks = document.querySelector('.nav-links');
+   const backdrop = document.querySelector('.mobile-menu-backdrop');
 
-    function closeMobileMenu() {
-      if (!menuToggle || !navLinks) return;
-      navLinks.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-      if (backdrop) backdrop.classList.remove('open');
-    }
+   if (!toggle || !navLinks) return;
 
-    function openMobileMenu() {
-      if (!menuToggle || !navLinks) return;
-      navLinks.classList.add('open');
-      menuToggle.setAttribute('aria-expanded', 'true');
-      menuToggle.setAttribute('aria-label', 'Close menu');
-      document.body.style.overflow = 'hidden';
-      if (backdrop) backdrop.classList.add('open');
-    }
+   function openMenu() {
+    navLinks.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+    document.body.style.overflow = 'hidden';
+    if (backdrop) backdrop.classList.add('open');
+   }
 
-    if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', () => {
-        const isOpen = navLinks.classList.contains('open');
-        if (isOpen) {
-          closeMobileMenu();
-        } else {
-          openMobileMenu();
-        }
-      });
+   function closeMenu() {
+    navLinks.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+    document.body.style.overflow = '';
+    if (backdrop) backdrop.classList.remove('open');
+   }
 
-      navLinks.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', closeMobileMenu);
-      });
+   toggle.addEventListener('click', () => {
+    navLinks.classList.contains('open') ? closeMenu() : openMenu();
+   });
 
-      if (backdrop) {
-        backdrop.addEventListener('click', closeMobileMenu);
-      }
+   // Cerrar al hacer click en un enlace
+   navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') closeMobileMenu();
-      });
-    }
+   // Cerrar al hacer tap en el backdrop
+   if (backdrop) backdrop.addEventListener('click', closeMenu);
 
-  </script>
+   // Cerrar con tecla Escape
+   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+  })();
+ </script>
+
 </body>
 </html>
