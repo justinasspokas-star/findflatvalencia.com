@@ -392,7 +392,52 @@
     .nav-cta    { display: none !important; }
   }
 
-</style>
+
+  /* ── INLINE CTA STRIP ── */
+  .inline-cta {
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .inline-cta p {
+    color: var(--mid);
+    font-size: .95rem;
+    margin: 0;
+  }
+  .inline-cta p strong {
+    color: var(--dark);
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: .2rem;
+  }
+  .inline-cta .btn-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    white-space: nowrap;
+    text-decoration: none;
+    background: var(--dark);
+    color: #fff;
+    padding: .8rem 1.35rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .76rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: background .18s ease;
+  }
+  .inline-cta .btn-inline:hover { background: var(--accent); }
+  @media (max-width: 600px) {
+    .inline-cta { flex-direction: column; align-items: flex-start; }
+    .inline-cta .btn-inline { width: 100%; justify-content: center; }
+  }
+
+  </style>
 </head>
 <body>
 
@@ -551,6 +596,16 @@
      </ul>
     </article>
    </div>
+
+   <!-- CTA strip after Services -->
+   <div class="inline-cta">
+    <p>
+     <strong>Not sure which service fits?</strong>
+     Questions? We reply fast and give honest advice.
+    </p>
+    <a class="btn-inline" href="https://docs.google.com/forms/d/e/1FAIpQLSdxXPG-dzI2IXyH8CfDdJmxdlSp20rvUesakMLwTe5v26tiOw/viewform?usp=publish-editor" target="_blank" rel="noopener">Book a free call &rarr;</a>
+   </div>
+
   </div>
  </section>
 
@@ -567,6 +622,16 @@
     <article class="step"><strong>03</strong><h3>Shortlist &amp; view</h3><p>We filter properties, contact agents, coordinate visits and report back honestly.</p></article>
     <article class="step"><strong>04</strong><h3>Secure &amp; settle</h3><p>We help with negotiation, paperwork coordination, key collection and move-in basics.</p></article>
    </div>
+
+   <!-- CTA strip after Process -->
+   <div class="inline-cta" style="border-color:rgba(255,255,255,.12);">
+    <p style="color:rgba(255,255,255,.65);">
+     <strong style="color:#fff;">Ready to get started?</strong>
+     It takes 15 minutes. No commitment, no pressure.
+    </p>
+    <a class="btn-inline" href="https://docs.google.com/forms/d/e/1FAIpQLSdxXPG-dzI2IXyH8CfDdJmxdlSp20rvUesakMLwTe5v26tiOw/viewform?usp=publish-editor" target="_blank" rel="noopener" style="background:var(--accent);">Book a free call &rarr;</a>
+   </div>
+
   </div>
  </section>
 
