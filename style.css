@@ -1,0 +1,3 @@
+/* Shared safe overrides. Main visual CSS remains inside each HTML file to avoid breaking layout. */
+img { max-width: 100%; height: auto; }
+a[href*="docs.google.com/forms"] { cursor: pointer; }
