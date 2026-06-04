@@ -1,3 +1,23 @@
 /* Shared safe overrides. Main visual CSS remains inside each HTML file to avoid breaking layout. */
 img { max-width: 100%; height: auto; }
 a[href*="docs.google.com/forms"] { cursor: pointer; }
+
+/* Logo size update: +25% bigger on desktop and mobile */
+.logo img {
+  height: 48px;
+}
+#hbg-panel .ph-head img {
+  height: 38px;
+}
+@media (max-width: 860px) {
+  .logo img {
+    height: 38px;
+    max-width: 240px;
+  }
+}
+@media (max-width: 480px) {
+  .logo img {
+    height: 36px;
+    max-width: 230px;
+  }
+}
